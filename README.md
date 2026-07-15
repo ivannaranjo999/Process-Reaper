@@ -1,8 +1,8 @@
 # Process Reaper - pr
 
-This is a system maintenance tool that looks for:
-- Zombie processes
-- Orphan processes
+This is a system maintenance tool that looks for
+- zombie processes, and
+- orphan processes.
 
 `pr` can be used to *monitor* and/or *kill* processes that fulfill one of the conditions above. 
 
