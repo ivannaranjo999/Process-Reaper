@@ -4,7 +4,7 @@ This is a system maintenance tool that looks for:
 - Zombie processes
 - Orphan processes
 
-`pr` can be used to _monitor_ *and* _kill_ processes that fulfill one of the conditions above. 
+`pr` can be used to *monitor* and/or *kill* processes that fulfill one of the conditions above. 
 
 ## Usage
 ```
