@@ -17,6 +17,7 @@
 #define PATH_LEN 128
 #define BUFF_LEN 1024
 #define DEFAULT_INTERVAL 5
+#define INIT_PID 1
 
 /* Type definitions */
 typedef struct {

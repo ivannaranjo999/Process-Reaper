@@ -22,7 +22,7 @@ static void usage(const char *progname){
   fprintf(stdout, "  -l, --loop           Loop and report every interval seconds.\n");
   fprintf(stdout, "  -i, --interval N     Set the interval in seconds (default: %d).\n", DEFAULT_INTERVAL);
   fprintf(stdout, "  -h, --help           Show this help message.\n");
-  fprintf(stdout, "  -k, --kill           Kill zombies and orphans. Be real careful when running with this option.\n");
+  fprintf(stdout, "  -k, --kill           Kill zombies' parents and orphans. Be real careful when running with this option.\n");
 }
 
 static void clear_screen() {
@@ -257,9 +257,9 @@ static void report_zombies(void){
         }
       }
 
-      /* Add process to kill list */
-      if (kill_targets)
-        kill_pids[kill_count++] = procs[i].pid;
+      /* Add parent process to kill list */
+      if (kill_targets && (procs[i].ppid > INIT_PID))
+        kill_pids[kill_count++] = procs[i].ppid;
 
       /* Print everything */
       fprintf(stdout, "%c %d %s %d %s %.0f %s\n",
@@ -325,7 +325,7 @@ int main(int argc, char *argv[]){
   }
 
   if (kill_targets){
-    fprintf(stdout, "[I]: You have enabled the kill option. This will terminate zombies and orphans.\n");
+    fprintf(stdout, "[I]: You have enabled the kill option. This will terminate zombies' parents and orphans.\n");
     for (int i = 10; i > 0; --i) {
       fprintf(stdout, "[I] Waiting, %d seconds to continue...\r", i);
       fflush(stdout);
